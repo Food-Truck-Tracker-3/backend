@@ -7,6 +7,10 @@ const Users = require('./auth-model')
 const {checkUsername, checkEmail, checkPassword} = require("./auth-middleware")
 
 
+authRouter.get("/", (req, res) => {
+    res.status(200).json({error:false, message:"available endpoints POST : /register-operator,POST: /register-diner, POST : /login"})
+})
+
 
 //POST /register-operator
 authRouter.post('/register-operator', checkUsername, checkEmail, checkPassword, (req, res) => {
