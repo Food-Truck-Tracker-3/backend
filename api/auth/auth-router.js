@@ -73,6 +73,7 @@ authRouter.post('/login', checkUsername, checkPassword, (req, res) => {
                 res.status(400).json({error: true, message: "invalid username"})
             }
         })
+        
 })
 
 //Token generation
@@ -83,7 +84,7 @@ function generateToken(payload){
     //     role: user.role
     // };
 
-    const secret = process.env.JWT_SECRET 
+    const secret = process.env.SECRET_JWT
 
     const options = {
         expiresIn: 60 * 60 * 8
