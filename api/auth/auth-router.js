@@ -8,7 +8,7 @@ const {checkUsername, checkEmail, checkPassword} = require("./auth-middleware")
 
 
 authRouter.get("/", (req, res) => {
-    res.status(200).json({error:false, message:"available endpoints POST : /register-operator,POST: /register-diner, POST : /login"})
+    res.status(200).json({error:false, message:"available endpoints POST: /register-operator, POST: /register-diner, POST: /login"})
 })
 
 
@@ -26,7 +26,6 @@ authRouter.post('/register-operator', checkUsername, checkEmail, checkPassword, 
     Users.addUser(credentials)
         .then(async user => {
             const token = await generateToken(user)
-
             res.status(201).json({error: false, message: "Operator successfully registered", token})
         })
         .catch(err => {
@@ -56,6 +55,8 @@ authRouter.post('/register-diner', checkUsername, checkEmail, checkPassword, (re
             res.status(400).json({error: true, message: "Could not register diner", err})
         })
 })
+
+
 //POST /login
 authRouter.post('/login', checkUsername, checkPassword, (req, res) => {
     Users.findBy({username: req.body.username})
@@ -72,41 +73,27 @@ authRouter.post('/login', checkUsername, checkPassword, (req, res) => {
                 res.status(400).json({error: true, message: "invalid username"})
             }
         })
+        
 })
 
 //Token generation
 
-function generateToken(user){
-    const payload = {
-        username: user.username,
-        role: user.role
-    };
+function generateToken(payload){
+    // const payload = {
+    //     username: user.username,
+    //     role: user.role
+    // };
 
-    const secret = process.env.JWT_SECRET || 'this is a secret'
+    const secret = process.env.SECRET_JWT
 
     const options = {
         expiresIn: 60 * 60 * 8
     }
-
+    
+    delete payload.password
     console.log(payload)
     return jwt.sign(payload, secret, options)
 }
-
-// function generateDinerToken(diner){
-//     const payload = {
-//         username: operator.username,
-//         role: 'operator'
-//     };
-
-//     const secret = process.env.JWT_SECRET || 'this is a secret'
-
-//     const options = {
-//         expiresIn: 60 * 60 * 8
-//     }
-
-//     console.log(payload)
-//     return jwt.sign(payload, secret, options)
-// }
 
 
 module.exports = authRouter
