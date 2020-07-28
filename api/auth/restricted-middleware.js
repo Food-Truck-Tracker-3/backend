@@ -1,13 +1,14 @@
 const jwt = require('jsonwebtoken')
-require('dotenv').config
+require('dotenv').config()
 
 module.exports = (req, res, next) => {
     const token = req.headers.authorization
     const secret = process.env.SECRET_JWT
-
+    console.log(secret)
     if(token){
         jwt.verify(token, secret, (err, decoded) => {
             if(err){
+                console.log(err)
                 res.status(401).json({error: true, message: "recieved an invalid token"})
             } else {
                 req.token = decoded
