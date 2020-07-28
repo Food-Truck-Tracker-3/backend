@@ -83,6 +83,7 @@ function generateToken(payload){
     //     username: user.username,
     //     role: user.role
     // };
+    
 
     const secret = process.env.SECRET_JWT
 
