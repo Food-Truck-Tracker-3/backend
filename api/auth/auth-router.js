@@ -65,7 +65,7 @@ authRouter.post('/login', checkUsername, checkPassword, (req, res) => {
                 if(bcrypt.compareSync(req.body.password, user.password)){
                     const token = await generateToken(user)
 
-                    res.status(200).json({error:false, message: "user successfully logged in", token})
+                    res.status(200).json({error:false, message: "user successfully logged in", token, data:user})
                 } else {
                     res.status(400).json({error: true, message: "invalid password"})
                 }
