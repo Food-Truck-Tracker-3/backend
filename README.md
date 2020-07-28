@@ -20,7 +20,7 @@ https://foodtruck-backend-3.herokuapp.com/
 
 | Request | URL | Description |
 | ------- | --- | ----------- |
-| GET | api/operators/trucks| returns a list of all trucks regardless of operator |
+| GET | /api/operators/trucks| returns a list of all trucks regardless of operator |
 | GET | /api/operators/trucks/:id | will return a specific truck |
 | POST | /api/operators/trucks | will post a new truck for the logged in operator |
 | PUT | /api/operators/trucks/:id | edit a specific truck for operator |
@@ -37,7 +37,7 @@ https://foodtruck-backend-3.herokuapp.com/
 | email | string | yes | no | max 128 char |
 | role | string | yes | no | role will be automatically assigned based on registration to either "operator" or "diner" |
 
-###Trucks
+### Trucks
 | Name | Type | Required | Unique | Notes |
 | ---- | ---- | -------- | ------ | ----- |
 | operator_id | integer | yes | no | will be auto assigned to the logged in operator |
