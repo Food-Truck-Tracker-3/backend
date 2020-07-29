@@ -6,7 +6,8 @@ module.exports ={
     findTruckById,
     removeTruck,
     addTruck,
-    updateTruck
+    updateTruck,
+    findOperatorTrucks
 }
 
 //finds all trucks
@@ -34,22 +35,16 @@ async function findTruckById(id){
     return result
 }
 
+//get all trucks for an operator
+ function findOperatorTrucks(id){
+    return db('trucks')
+
+        .join('users', 'users.id', 'trucks.operator_id')
+        .select('*')
+        .where({operator_id:id})
+ }
+
 //adds a truck
-// async function addTruck(truck, operatorId){
-//     const newTruck = {
-//         ...truck, 
-//         operator_id: operatorId
-//     }
-
-//     await db('trucks').insert(newTruck)
-
-//     return findTrucks()
-// }
-// const addTruck = async (obj) => {
-//     const [id] = await db('trucks').insert(obj).returning("id")
-//     return findTruckById(id)
-// }
-
 async function addTruck(obj){
     const [id] = await db('trucks').insert(obj).returning("id")
     return findTruckById(id)
