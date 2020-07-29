@@ -15,6 +15,22 @@ router.get('/trucks', (req, res) => {
             res.status(500).json(err)
         })
 })
+//find all trucks from an operator
+router.get('/trucks/:id/user', (req, res) => {
+    const {id} = req.params
+
+    Operators.findOperatorTrucks(id)
+        .then(trucks => {
+            if(trucks.length){
+                res.json(trucks)
+            } else {
+                res.status(404).json({message: 'could not find trucks for given user'})
+            }
+        })
+        .catch(err => {
+            res.status(500).json({message: 'failed to get trucks'})
+        })
+})
 
 router.get('/trucks/:id', (req, res) => {
     // res.status(200).json({error: false, message:'available endpoints for operators /trucks'})

@@ -22,6 +22,7 @@ https://foodtruck-backend-3.herokuapp.com/
 | ------- | --- | ----------- |
 | GET | /api/operators/trucks| returns a list of all trucks regardless of operator |
 | GET | /api/operators/trucks/:id | will return a specific truck |
+| GET | /api/operators/trucks/:id/user| will return all of the trucks for specified operator |
 | POST | /api/operators/trucks | will post a new truck for the logged in operator |
 | PUT | /api/operators/trucks/:id | edit a specific truck for operator |
 | DELETE | /api/operators/trucks/:id | remove specific truck for operator |
