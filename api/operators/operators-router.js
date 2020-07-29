@@ -7,7 +7,7 @@ const {checkUser, checkTruck} = require('./operators-middleware')
 //GET returns a list of all trucks
 router.get('/trucks', (req, res) => {
     // res.status(200).json({error: false, message:'available endpoints for operators /trucks'})
-    Operators.findTrucks()
+    Operators.findFullTrucks()
         .then( trucks => {
             res.status(200).json(trucks)
         })
