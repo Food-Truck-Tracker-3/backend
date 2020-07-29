@@ -7,14 +7,25 @@ module.exports ={
     removeTruck,
     addTruck,
     updateTruck,
-    findOperatorTrucks
+    findOperatorTrucks,
+    findFullTrucks
 }
 
 //finds all trucks
 function findTrucks(){
     return db('trucks')
 }
+//A fully detailed list of all trucks
+async function findFullTrucks(){
+    
+    const trucks = await db('trucks')
+        .innerJoin('menu', 'trucks.id', 'menu.truck_id')
+        .innerJoin('reviews', 'trucks.id', 'reviews.truck_id')
+        .select(['trucks.*', db.raw('json_agg(menu.* ) as menu'), db.raw('json_agg(reviews.*) as reviews') ])
+        .groupBy('trucks.id')
 
+    return trucks
+}
 //find truck by id
 async function findTruckById(id){
     const truck = await db('trucks')
