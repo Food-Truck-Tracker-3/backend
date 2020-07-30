@@ -7,7 +7,7 @@ const {checkUser, checkTruck} = require('./operators-middleware')
 //GET returns a list of all trucks
 router.get('/trucks', (req, res) => {
     // res.status(200).json({error: false, message:'available endpoints for operators /trucks'})
-    Operators.findFullTrucks()
+    Operators.findTrucks()
         .then( trucks => {
             res.status(200).json(trucks)
         })
@@ -75,16 +75,6 @@ router.put('/trucks/:id', checkUser, checkTruck, (req, res) => {
         })
 })
 //DELETE truck
-// router.delete("/trucks/:id", checkUser, checkTruck, (req, res) => {
-//     Operators.removeTruck(req.body)
-//         .then(truck => {
-//             res.status(200).json({error:false, message:'truck removed'})
-//         })
-//         .catch(err => {
-//             res.status(500).json(err)
-//         })
-// })
-
 router.delete('/trucks/:id', (req, res) => {
     const { id } = req.params;
   
