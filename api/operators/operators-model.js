@@ -11,7 +11,7 @@ module.exports ={
     findFullTrucks
 }
 
-//finds all trucks
+//finds all trucks boring info not currently using in router
 function findTrucks(){
     return db('trucks')
 }
@@ -22,6 +22,7 @@ async function findFullTrucks(){
         .innerJoin('menu', 'trucks.id', 'menu.truck_id')
         .innerJoin('reviews', 'trucks.id', 'reviews.truck_id')
         .select(['trucks.*', db.raw('json_agg(menu.* ) as menu'), db.raw('json_agg(reviews.*) as reviews') ])
+        // .distinct('menu.id')
         .groupBy('trucks.id')
 
     return trucks
@@ -44,6 +45,13 @@ async function findTruckById(id){
     const result = {...truck, menu, reviews};
 
     return result
+    // const truck = await db('trucks')
+    //     .innerJoin('menu', 'trucks.id', 'menu.truck_id')
+    //     .innerJoin('reviews', 'trucks.id', 'reviews.truck_id')
+    //     .select(['trucks.*', db.raw('json_agg(menu.* ) as menu'), db.raw('json_agg(reviews.*) as reviews') ])
+    //     .groupBy('trucks.id')
+    //     .where({truck_id:id})
+    // return truck
 }
 
 //get all trucks for an operator
@@ -68,12 +76,8 @@ async function removeTruck(id){
     return findTrucks()
 }
 
-//updates a truck
-// async function updateTruck(truck){
-//     const [id] = await db('trucks').where({'trucks.id':truck}).update(truck).returning("id")
-//     return findTruckById(id)
-// }
 
+//updates a truck
 function updateTruck(changes, id){
   return db('trucks')
   .where({id})
