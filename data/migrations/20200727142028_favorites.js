@@ -5,9 +5,13 @@ exports.up = function(knex) {
     tbl.integer('diner_id')
         .references('id')
         .inTable('users')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
     tbl.integer('truck_id')
         .references('id')
         .inTable('trucks')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
 
 
   })
