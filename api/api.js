@@ -17,7 +17,7 @@ apiRouter.use("/diners", restricted, checkRole("diner"), dinersRouter)
 apiRouter.use("/operators", restricted, checkRole("operator"), operatorsRouter)
 
 apiRouter.get("/", (req, res) => {
-    res.status(200).json({message: "available endpoints: auth, diners, operators", error: false})
+    res.status(200).json({message: "available endpoints: /auth, /diners, /operators, /oleg, /galo", error: false})
 })
 
 
