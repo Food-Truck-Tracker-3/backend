@@ -2,6 +2,14 @@
 
 ## Documentation
 
+## Team Members
+Zachery Smith - Project Lead 
+Virginia Davenport - Node JS Backend Developer 
+Temtsel-Och Ulziisaikhan - React Developer 
+Oleg Miroshnichenko - React Developer 
+Galo Sandoval - React Developer 
+Erica Girges - UI Developer
+
 ## Base URL for deployed site 
 
 https://foodtruck-backend-3.herokuapp.com/ 

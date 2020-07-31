@@ -51,7 +51,7 @@ describe('operators', () => {
         //         .set({authorization: token})
         //         .send({name:'test', cuisine:'american'})
         //         .then(res => {
-        //             expect(res.body.name).toMatch('test')
+        //             expect(res.name).toBe('test')
         //         })
         // })
 
